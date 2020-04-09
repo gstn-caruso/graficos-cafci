@@ -1,15 +1,28 @@
-app:
-  build: .
-  command: rails server -p 3000 -b '0.0.0.0'
-  volumes:
-    - .:/app
-  ports:
-    - "3000:3000"
-  links:
-    - postgres
-postgres:
-  image: postgres:12.2
-  environment:
-    POSTGRES_HOST_AUTH_METHOD: "trust"
-  ports:
-    - "5432"
+version: '3.0'
+
+services:
+  db:
+    image: postgres:12.2
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    ports:
+      - 5432:5432
+  fontend:
+    image: ${DOCKER_IMAGE_NAME-app}
+    command: ["./scripts/start_webpack_dev.sh"]
+    volumes:
+      - .:/opt/app:cached
+    ports:
+      - 3035:3035
+  backend:
+    image: ${DOCKER_IMAGE_NAME-app}
+    build:
+      context: .
+    links:
+      - db
+      - fontend
+    ports:
+      - 3000:3000
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_rails.sh"]
+    volumes:
+      - .:/opt/app:cached

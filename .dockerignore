@@ -1,6 +1,5 @@
 .git*
 .idea
-yarn.lock
 log/*
 tmp/*
 node_modules/*
