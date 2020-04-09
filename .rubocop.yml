@@ -1,0 +1,382 @@
+# This is the configuration used to check the rubocop source code.
+inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'node_modules/**/*'
+    - 'db/**/*'
+    - 'features/step_definitions/debug_steps.rb'
+    - 'lib/tasks/find_relaunches_out_of_stock_colors.rake' # FIXME: Refactor this rake task
+    - 'apps/**/spec/dummy/**/*'
+    - 'bin/**/*'
+    - '**/*.slim'
+    - 'lib/tasks/db_pull.rake'
+    - 'lib/tasks/tables/tables.rb'
+    - 'lib/templates/active_record/migration/migration.rb'
+    - 'config/initializers/appoptics_apm.rb'
+  UseCache: true
+  CacheRootDirectory: ~
+
+# revisit this once Ruby 3 is out
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Max: 2
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/models/campaign_spec.rb'
+    - 'apps/buyer/spec/controllers/buyer/checkout_controller_spec.rb'
+
+Metrics/LineLength:
+  Include:
+    - 'app/decorators/**/*'
+    - 'app/forms/**/*'
+    - 'app/lib/**/*'
+    - 'app/middleware/**/*'
+    - 'app/models/**/*'
+    - 'app/query_objects/**/*'
+    - 'app/services/**/*'
+    - 'app/workers/**/*'
+  Max: 120
+  AllowURI: true
+
+Lint/AssignmentInCondition:
+  AllowSafeAssignment: true
+
+Lint/UselessAccessModifier:
+  Exclude:
+    - 'apps/api/lib/serialization/json_serializer.rb'
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'app/lib/image_api.rb'
+    - 'app/lib/image_api/v1/v1.rb'
+    - 'apps/buyer/app/presenters/buyer/shipping_cost_presenter.rb'
+    - 'app/lib/orders/calculate_cost.rb'
+
+Security/Eval:
+  Exclude:
+    - 'features/models/shipping_service_selection/step_definitions/non_us_steps.rb'
+    - 'features/models/shipping_service_selection/step_definitions/united_states_steps.rb'
+    - 'spec/services/sidekiq_queue_size_spec.rb'
+
+Lint/RescueException:
+  Exclude:
+  - 'lib/sidekiq/middleware/parameters_logging.rb'
+
+Lint/UnusedMethodArgument:
+  Exclude:
+   - 'app/models/campaign_content_review_status.rb'
+
+Style/AndOr:
+  EnforcedStyle: 'conditionals'
+
+Style/CollectionMethods:
+  PreferredMethods:
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'detect'
+    find_all: 'select'
+
+Layout/DotPosition:
+  EnforcedStyle: 'trailing'
+
+Layout/IndentationConsistency:
+  Exclude:
+   - 'script/judgment' # the inline comments are breaking this rule
+
+Style/RescueModifier:
+  Exclude:
+   - 'script/judgment' # we're working with files that might not be there
+
+Style/WordArray:
+  MinSize: 3
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: 'comma'
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: 'comma'
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: 'comma'
+
+Style/HashSyntax:
+  EnforcedStyle: 'ruby19'
+
+Performance/Casecmp:
+  Enabled: false
+
+Performance/UnfreezeString:
+  Exclude:
+    - 'spec/teespring/feature_spec.rb'
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/Alias:
+  Enabled: false
+
+Style/UnneededInterpolation:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+Layout/AlignArguments:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/ZeroLengthPredicate:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Lint/ToJSON:
+  Enabled: false
+
+#rubocop-rspec Cops
+
+RSpec/MultipleExpectations:
+  Max: 7
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 10
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+FactoryBot/AttributeDefinedStatically:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/NotToNot:
+  Enabled: false
+
+RSpec/ExpectChange:
+  Enabled: false
+
+RSpec/ReturnFromStub:
+  Enabled: false
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
+RSpec/ItBehavesLike:
+  EnforcedStyle: it_behaves_like
+  Enabled: false
+
+RSpec/HookArgument:
+  EnforcedStyle: implicit
+  Enabled: false
+
+Capybara/FeatureMethods:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/SubjectStub:
+  Enabled: false
+
+RSpec/ScatteredLet:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/ExpectInHook:
+  Enabled: false
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: false
+
+RSpec/UnspecifiedException:
+  Enabled: false
+
+RSpec/ScatteredSetup:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/DescribeMethod:
+  Enabled: false
+
+#Lint/Syntax:
+#  Enabled: false
+
+RSpec/RepeatedDescription:
+  Enabled: false
+
+RSpec/ExpectActual:
+  Enabled: false
+
+RSpec/IteratedExpectation:
+  Enabled: false
+
+RSpec/MultipleDescribes:
+  Enabled: false
+
+RSpec/RepeatedExample:
+  Enabled: false
+
+RSpec/OverwritingSetup:
+  Enabled: false
+
+RSpec/Be:
+  Enabled: false
+
+RSpec/VoidExpect:
+  Enabled: false
+
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
+RSpec/ExampleWithoutDescription:
+  Enabled: false
+
+Lint/UnneededCopEnableDirective:
+  Enabled: false
+
+Capybara/CurrentPathExpectation:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+
+RSpec/ExpectOutput:
+  Enabled: false
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+RSpec/EmptyLineAfterSubject:
+  Enabled: false
+
+RSpec/ContextMethod:
+  Enabled: false
+
+RSpec/EmptyLineAfterHook:
+  Enabled: false
+
+RSpec/EmptyLineAfterExampleGroup:
+  Enabled: false
+
+RSpec/SharedExamples:
+  Enabled: false
+
+RSpec/ImplicitExpect:
+  Enabled: false
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
+RSpec/LetBeforeExamples:
+  Enabled: false
+
+RSpec/SharedContext:
+  Enabled: false
+
+RSpec/MultipleSubjects:
+  Enabled: false
+
+RSpec/HooksBeforeExamples:
+  Enabled: false
+
+RSpec/ReceiveCounts:
+  Enabled: false
+
+Lint/UnneededCopDisableDirective:
+  Enabled: false
+
+RSpec/BeEql:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+FactoryBot/CreateList:
+  Enabled: false
+
+RSpec/ReceiveNever:
+  Enabled: false
+
+FactoryBot/FactoryClassName:
+  Enabled: false
+
+RSpec/Focus:
+  Enabled: false

@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /app
+RUN useradd devuser && chown -R devuser /app
+USER devuser
 
 WORKDIR /app
 
