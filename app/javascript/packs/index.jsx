@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-const Saludar = props => <div>Hola {props.nombre}!</div>;
+import App from "../components/App";
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Saludar nombre="Reacts" />,
+    <App/>,
     document.body.appendChild(document.createElement('div')),
   )
 });
