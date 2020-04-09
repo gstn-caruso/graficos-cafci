@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  host: postgres
+  port: 5432
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: graficos_cafci_development
+
+production:
+  <<: *default
+  database: graficos_cafci_production
+  username: graficos_cafci
+  password: <%= ENV['GRAFICOS_CAFCI_DATABASE_PASSWORD'] %>
