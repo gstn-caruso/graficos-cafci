@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_092459) do
     t.string "nombre", null: false
     t.datetime "fecha", null: false
     t.float "valor_cuotaparte", null: false
-    t.float "cantidad_cuotaparte"
-    t.float "patrimonio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
