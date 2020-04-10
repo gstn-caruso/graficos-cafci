@@ -11,7 +11,5 @@ development:
   database: graficos_cafci_development
 
 production:
-  <<: *default
-  database: graficos_cafci_production
-  username: graficos_cafci
-  password: <%= ENV['GRAFICOS_CAFCI_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
