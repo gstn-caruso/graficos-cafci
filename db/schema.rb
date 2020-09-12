@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_092459) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2020_04_09_235557) do
 
   create_table "fondos_comunes_de_inversion", force: :cascade do |t|
     t.string "nombre", null: false
