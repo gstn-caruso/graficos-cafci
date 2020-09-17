@@ -1,7 +1,0 @@
-.git*
-.idea
-log/*
-tmp/*
-node_modules/*
-Dockerfile
-README.rdoc
