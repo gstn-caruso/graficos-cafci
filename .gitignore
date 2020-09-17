@@ -19,4 +19,3 @@ yarn-debug.log*
 .yarn-integrity
 .idea
 .generators
-db/*.sqlite3
