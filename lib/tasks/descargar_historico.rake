@@ -3,7 +3,7 @@ namespace :descargar do
   task historico: :environment do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
     api_url = 'https://api.cafci.org.ar/estadisticas/informacion/diaria/3/'
-    inicio_historico = 2.years.ago
+    inicio_historico = 1.year.ago
 
     ventana_de_tiempo = ((inicio_historico)..(1.day.ago))
     rango_de_fechas = (ventana_de_tiempo.begin.to_date..ventana_de_tiempo.last.to_date)
